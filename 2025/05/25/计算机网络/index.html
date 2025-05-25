@@ -1,0 +1,846 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>计算机网络 | 李瑞康Blog</title><meta name="author" content="李瑞康"><meta name="copyright" content="李瑞康"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="计网 计算机网络的概念 计算机网络的组成与功能   功能    组成  功能  电路交换 报文交换 分组交换     三种交换方式的性能分析  计算机网络的分类         计算机网络的性能指标  速率  带宽   吞吐量   ![image-20250429220847637](C:\Users\李瑞康\AppData\Roaming\Typora\typora-user-images\im">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络">
+<meta property="og:url" content="http://example.com/2025/05/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="李瑞康Blog">
+<meta property="og:description" content="计网 计算机网络的概念 计算机网络的组成与功能   功能    组成  功能  电路交换 报文交换 分组交换     三种交换方式的性能分析  计算机网络的分类         计算机网络的性能指标  速率  带宽   吞吐量   ![image-20250429220847637](C:\Users\李瑞康\AppData\Roaming\Typora\typora-user-images\im">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-05-25T01:50:41.000Z">
+<meta property="article:modified_time" content="2025-05-25T02:02:40.439Z">
+<meta property="article:author" content="李瑞康">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "计算机网络",
+  "url": "http://example.com/2025/05/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-05-25T01:50:41.000Z",
+  "dateModified": "2025-05-25T02:02:40.439Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "李瑞康",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/05/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '计算机网络',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">李瑞康Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">计算机网络</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">计算机网络</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-05-25T01:50:41.000Z" title="Created 2025-05-25 09:50:41">2025-05-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-05-25T02:02:40.439Z" title="Updated 2025-05-25 10:02:40">2025-05-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%87%AA%E7%A0%94/">自研</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>计网</p>
+<p>计算机网络的概念</p>
+<p>计算机网络的组成与功能</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429212905716.png" alt="image-20250429212905716"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429212928130.png" alt="image-20250429212928130"></p>
+<p>功能</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429213431079.png" alt="image-20250429213431079"></p>
+<p>  组成</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429213602081.png" alt="image-20250429213602081"></p>
+<p>功能</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429213633009.png" alt="image-20250429213633009"></p>
+<p>电路交换 报文交换 分组交换</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429214220722.png" alt="image-20250429214220722"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429214232455.png" alt="image-20250429214232455"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429214238098.png" alt="image-20250429214238098"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429214247950.png" alt="image-20250429214247950"></p>
+<p>三种交换方式的性能分析</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429214530472.png" alt="image-20250429214530472"></p>
+<p>计算机网络的分类</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429214603068.png" alt="image-20250429214603068"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429214700290.png" alt="image-20250429214700290"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429215159655.png" alt="image-20250429215159655"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429215252440.png" alt="image-20250429215252440"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429215312677.png" alt="image-20250429215312677"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429215325311.png" alt="image-20250429215325311"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429215331944.png" alt="image-20250429215331944"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429215546022.png" alt="image-20250429215546022"></p>
+<p>计算机网络的性能指标</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429215605346.png" alt="image-20250429215605346"></p>
+<p>速率</p>
+<p><img src="C:\Users\李瑞康\AppData\Roaming\Typora\typora-user-images\image-20250429215846802.png![image-20250429215919519](计算机网络.assets/image-20250429215919519.png"></p>
+<p>带宽</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429220046607.png" alt="image-20250429220046607"><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429220509598.png" alt="image-20250429220509598"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429220532849.png" alt="image-20250429220532849"></p>
+<p>吞吐量</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429220804385.png" alt="image-20250429220804385"></p>
+<pre><code> ![image-20250429220847637](C:\Users\李瑞康\AppData\Roaming\Typora\typora-user-images\image-20250429220847637.png)
+</code></pre>
+<p>计算机网络的性能指标 下</p>
+<p>时延</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429221020792.png" alt="image-20250429221020792"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429221031180.png" alt="image-20250429221031180"></p>
+<p>时延带宽积</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429221915491.png" alt="image-20250429221915491"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429222448536.png" alt="image-20250429222448536"></p>
+<p>往返时延</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429222636990.png" alt="image-20250429222636990"></p>
+<p>信道利用率</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429222746128.png" alt="image-20250429222746128"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429222824013.png" alt="image-20250429222824013"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429222914628.png" alt="image-20250429222914628"></p>
+<p>计算机网络分层结构  上</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429223345335.png" alt="image-20250429223345335"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429223511797.png" alt="image-20250429223511797"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250429223637677.png" alt="image-20250429223637677"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430101245588.png" alt="image-20250430101245588"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430101255539.png" alt="image-20250430101255539"></p>
+<p>计算机网络分层 下</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430102054913.png" alt="image-20250430102054913"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430102447592.png" alt="image-20250430102447592"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430102528405.png" alt="image-20250430102528405"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430171826934.png" alt="image-20250430171826934"></p>
+<p>osi参考模型   tcp&#x2F;ip模型</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430172623864.png" alt="image-20250430172623864"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430172949025.png" alt="image-20250430172949025"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430173139206.png" alt="image-20250430173139206"></p>
+<p>物理层</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430173615913.png" alt="image-20250430173615913"></p>
+<p>链路层       物联网叔会使用  </p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430174011462.png" alt="image-20250430174011462"></p>
+<p>网络层</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430174652482.png" alt="image-20250430174652482"></p>
+<p>传输层</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430175246330.png" alt="image-20250430175246330"></p>
+<p>会话层 表示层 应用层</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430175505757.png" alt="image-20250430175505757"></p>
+<p>各层数据传输单位</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430175651378.png" alt="image-20250430175651378"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430175714383.png" alt="image-20250430175714383"></p>
+<p>红字是主要功能</p>
+<p>tcp&#x2F;ip模型</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430195752457.png" alt="image-20250430195752457"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430205130148.png" alt="image-20250430205130148"></p>
+<p>物理层 通信基础的基本概念</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430211241597.png" alt="image-20250430211241597"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430211407439.png" alt="image-20250430211407439"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430211551212.png" alt="image-20250430211551212"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430211605192.png" alt="image-20250430211605192"></p>
+<p>码元和比特的关系</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430213143054.png" alt="image-20250430213143054"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430213302442.png" alt="image-20250430213302442"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430213308819.png" alt="image-20250430213308819"></p>
+<p>信道的极限容量</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430213516680.png" alt="image-20250430213516680"></p>
+<p>奈奎斯特定理</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430214150887.png" alt="image-20250430214150887"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430214352579.png" alt="image-20250430214352579"></p>
+<p>香农定理</p>
+<p>信噪比</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430214726251.png" alt="image-20250430214726251"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430214926666.png" alt="image-20250430214926666"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430215003907.png" alt="image-20250430215003907"></p>
+<p>奈奎斯特定理想和香农定理</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430215525475.png" alt="image-20250430215525475"></p>
+<p>编码和调制</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430221219255.png" alt="image-20250430221219255"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250430221525590.png" alt="image-20250430221525590"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502091603540.png" alt="image-20250502091603540"></p>
+<p>曼彻斯特编码</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502091625226.png" alt="image-20250502091625226"></p>
+<p> <img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502091842855.png" alt="image-20250502091842855"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502092007377.png" alt="image-20250502092007377"></p>
+<p>编码和调制  下</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502092045183.png" alt="image-20250502092045183"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502092105788.png" alt="image-20250502092105788"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502092930126.png" alt="image-20250502092930126"></p>
+<p>正交幅度调制</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502093133594.png" alt="image-20250502093133594"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502093235334.png" alt="image-20250502093235334"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502093850822.png" alt="image-20250502093850822"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502094104189.png" alt="image-20250502094104189"></p>
+<p>知识回顾与重要考点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502094418455.png" alt="image-20250502094418455"></p>
+<p>各种编码的特点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502094604883.png" alt="image-20250502094604883"></p>
+<p>传播介质</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502095004717.png" alt="image-20250502095004717"></p>
+<p>双绞线</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502095225179.png" alt="image-20250502095225179"></p>
+<p>、、<img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502095533995.png" alt="image-20250502095533995"></p>
+<p>同轴电缆</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502095818840.png" alt="image-20250502095818840"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502095928614.png" alt="image-20250502095928614"></p>
+<p>光纤</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502100211487.png" alt="image-20250502100211487"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502100440999.png" alt="image-20250502100440999"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502100525530.png" alt="image-20250502100525530"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502100845812.png" alt="image-20250502100845812"></p>
+<p>无线传输介质</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502101410951.png" alt="image-20250502101410951"></p>
+<p>物理层接口的特性</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502142121304.png" alt="image-20250502142121304"></p>
+<p>知识回顾与重要考点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502143727514.png" alt="image-20250502143727514"></p>
+<p> 物理层设备</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502144019621.png" alt="image-20250502144019621"></p>
+<p>中继器</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502145159355.png" alt="image-20250502145159355"></p>
+<p>集线器</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502145937590.png" alt="image-20250502145937590"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502151109710.png" alt="image-20250502151109710"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502151655372.png" alt="image-20250502151655372"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502152543063.png" alt="image-20250502152543063"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502152743499.png" alt="image-20250502152743499"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502152822779.png" alt="image-20250502152822779"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502153215661.png" alt="image-20250502153215661"></p>
+<p>知识回顾和重要考点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502153443483.png" alt="image-20250502153443483"></p>
+<p>数据链路层的功能</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502153915140.png" alt="image-20250502153915140"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502165816757.png" alt="image-20250502165816757"></p>
+<p>组帧</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502170322070.png" alt="image-20250502170322070"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502170335106.png" alt="image-20250502170335106"></p>
+<p>组帧的方法</p>
+<p>字符计数法</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502170915380.png" alt="image-20250502170915380"></p>
+<p>字节填充法</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502171635023.png" alt="image-20250502171635023"></p>
+<p>零比特填充法</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502172128260.png" alt="image-20250502172128260"></p>
+<p>违规编码法</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502172516553.png" alt="image-20250502172516553"></p>
+<p>知识回顾与重要考点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502172900162.png" alt="image-20250502172900162"></p>
+<p>检错编码 奇偶校验码 </p>
+<p>数据链路层 的 差错控制功能</p>
+<p><strong><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502174228402.png" alt="image-20250502174228402"></strong></p>
+<p>本节总览</p>
+<p>·<img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502174319484.png" alt="image-20250502174319484"></p>
+<p>奇偶校验码</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502174640150.png" alt="image-20250502174640150"></p>
+<p>异或运算</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502181237545.png" alt="image-20250502181237545"></p>
+<p>知识回顾和重要考点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502181744734.png" alt="image-20250502181744734"></p>
+<p>检错编码 循环冗余校验码</p>
+<p>![</p>
+<p>](C:\Users\李瑞康\AppData\Roaming\Typora\typora-user-images\image-20250502181818401.png)</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502184211968.png" alt="image-20250502184211968"></p>
+<p>循环冗余校验码</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502184918093.png" alt="image-20250502184918093"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502185234950.png" alt="image-20250502185234950"> </p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502195252548.png" alt="image-20250502195252548"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502195432962.png" alt="image-20250502195432962"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502195921499.png" alt="image-20250502195921499"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502200347880.png" alt="image-20250502200347880"></p>
+<p>知识回顾</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502201758558.png" alt="image-20250502201758558"></p>
+<p>纠错编码 海明校验码</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502202528423.png" alt="image-20250502202528423"></p>
+<p>海明校验码</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502203022731.png" alt="image-20250502203022731"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502203310516.png" alt="image-20250502203310516"></p>
+<p> 海明码求解步骤</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502221315873.png" alt="image-20250502221315873"></p>
+<p>海明码纠错原理 </p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502221703066.png" alt="image-20250502221703066"></p>
+<p>全校验位</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502222114076.png" alt="image-20250502222114076"></p>
+<p>知识回顾</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502222425206.png" alt="image-20250502222425206"></p>
+<p>流量控制、可靠传输与滑动窗口</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502222846158.png" alt="image-20250502222846158"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502223022978.png" alt="image-20250502223022978"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502223528632.png" alt="image-20250502223528632"></p>
+<p>滑动窗口机制</p>
+<p>重点关注四个方面</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502223626845.png" alt="image-20250502223626845"></p>
+<p>停止等待协议</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250502223850161.png" alt="image-20250502223850161"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503081541612.png" alt="image-20250503081541612"></p>
+<p>超时重传</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503081910230.png" alt="image-20250503081910230"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503081951244.png" alt="image-20250503081951244"></p>
+<p>知识回顾</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503082033721.png" alt="image-20250503082033721"></p>
+<p>后退N帧协议</p>
+<p>要点总览</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503082210237.png" alt="image-20250503082210237"></p>
+<p>累计确认</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503082318192.png" alt="image-20250503082318192"></p>
+<p>数据帧丢失    </p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503082422576.png" alt="image-20250503082422576"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503082645538.png" alt="image-20250503082645538"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503082807401.png" alt="image-20250503082807401"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503082947518.png" alt="image-20250503082947518"></p>
+<p>知识回顾与重要考点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503083156315.png" alt="image-20250503083156315"></p>
+<p>选择重传协议   SR</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503083235685.png" alt="image-20250503083235685"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503083641347.png" alt="image-20250503083641347"></p>
+<p>利用率不高  如果 不满足 2 的话</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503083720619.png" alt="image-20250503083720619"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503083745120.png" alt="image-20250503083745120"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503083856664.png" alt="image-20250503083856664"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503083923272.png" alt="image-20250503083923272"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503084013000.png" alt="image-20250503084013000"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503084035108.png" alt="image-20250503084035108"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503084222186.png" alt="image-20250503084222186"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503084249013.png" alt="image-20250503084249013"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503084350445.png" alt="image-20250503084350445"></p>
+<p>知识回顾与重要考点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503084421975.png" alt="image-20250503084421975"></p>
+<p>三种协议的信道利用率</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503084450270.png" alt="image-20250503084450270"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503084619390.png" alt="image-20250503084619390"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503084639548.png" alt="image-20250503084639548"></p>
+<p>停止等待协议的信道利用率</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503084734892.png" alt="image-20250503084734892"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503084840706.png" alt="image-20250503084840706"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503085015903.png" alt="image-20250503085015903"></p>
+<p> <img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503095132360.png" alt="image-20250503095132360"></p>
+<p>例题 </p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503095603201.png" alt="image-20250503095603201"></p>
+<p>也可以用传输速率比上带宽</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503102615825.png" alt="image-20250503102615825"></p>
+<p>滑动窗口协议</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503103051756.png" alt="image-20250503103051756"></p>
+<p>ARQ协议 </p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503103322748.png" alt="image-20250503103322748"></p>
+<p>例题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503103941751.png" alt="image-20250503103941751"></p>
+<p>知识回顾与重要考点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503104137264.png" alt="image-20250503104137264"></p>
+<p>信道划分     介质访问控制</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503104350424.png" alt="image-20250503104350424"></p>
+<p>408 链路层部分</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503104408214.png" alt="image-20250503104408214"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503104446285.png" alt="image-20250503104446285"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503104537081.png" alt="image-20250503104537081"></p>
+<p>时分复用</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503104719624.png" alt="image-20250503104719624"></p>
+<p>统计时分复用</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503104802891.png" alt="image-20250503104802891"></p>
+<p>频分复用</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503104916167.png" alt="image-20250503104916167"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503105044249.png" alt="image-20250503105044249"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503105337962.png" alt="image-20250503105337962"></p>
+<p>波分复用</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503105503945.png" alt="image-20250503105503945"></p>
+<p>信道划分 介质访问控制 下</p>
+<p>码分复用</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503111430520.png" alt="image-20250503111430520"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503111437190.png" alt="image-20250503111437190"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503112754481.png" alt="image-20250503112754481"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503113410873.png" alt="image-20250503113410873"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503113501696.png" alt="image-20250503113501696"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503113511940.png" alt="image-20250503113511940"></p>
+<p>例题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503113603753.png" alt="image-20250503113603753"></p>
+<p>知识回顾与重要考点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503113734288.png" alt="image-20250503113734288"></p>
+<p>随机访问介质访问控制</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503113757463.png" alt="image-20250503113757463"></p>
+<p>知识总览</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503113802327.png" alt="image-20250503113802327"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503114217603.png" alt="image-20250503114217603"></p>
+<p>纯aloha协议</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503114258016.png" alt="image-20250503114258016"></p>
+<p>时隙aloha协议</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503114445689.png" alt="image-20250503114445689"></p>
+<p>csma协议</p>
+<p>1-坚持</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503141848855.png" alt="image-20250503141848855"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503150825897.png" alt="image-20250503150825897"></p>
+<p>非坚持</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503151142280.png" alt="image-20250503151142280"></p>
+<p>p-坚持</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503151556013.png" alt="image-20250503151556013"></p>
+<p>知识回顾与重要考点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503151756989.png" alt="image-20250503151756989"></p>
+<p>csma协议  cd协议 上</p>
+<p>知识总览</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503152328819.png" alt="image-20250503152328819"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503152349662.png" alt="image-20250503152349662"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503153009545.png" alt="image-20250503153009545"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503153754276.png" alt="image-20250503153754276"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503153829642.png" alt="image-20250503153829642"></p>
+<p>csma协议 cd协议 下</p>
+<p>争用期</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503154747386.png" alt="image-20250503154747386"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503155620225.png" alt="image-20250503155620225"></p>
+<p>csma 最短帧长限制</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503160335267.png" alt="image-20250503160335267"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503160604179.png" alt="image-20250503160604179"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503160708870.png" alt="image-20250503160708870"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503160923781.png" alt="image-20250503160923781"></p>
+<p>csma 协议 ca协议</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503161338847.png" alt="image-20250503161338847"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503161620451.png" alt="image-20250503161620451"></p>
+<p>什么是AP</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503162038965.png" alt="image-20250503162038965"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503165303407.png" alt="image-20250503165303407"></p>
+<p>不考虑隐藏站</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503165549031.png" alt="image-20250503165549031"></p>
+<p>解决隐蔽站</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503165838050.png" alt="image-20250503165838050"></p>
+<p>​	<img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503170834537.png" alt="image-20250503170834537"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503171405131.png" alt="image-20250503171405131"></p>
+<p>例题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503171520682.png" alt="image-20250503171520682"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503171612866.png" alt="image-20250503171612866"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503172035289.png" alt="image-20250503172035289"></p>
+<p>令牌传递协议</p>
+<p>轮询访问</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503172057968.png" alt="image-20250503172057968"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503200514593.png" alt="image-20250503200514593"></p>
+<p> 令牌传递协议的工作原理</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503201622199.png" alt="image-20250503201622199"></p>
+<p>令牌帧 数据帧</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503201603937.png" alt="image-20250503201603937"></p>
+<p>mau 令牌环网 的 集中控制站</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503201853994.png" alt="image-20250503201853994"></p>
+<p>知识回顾与重要考点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503202325006.png" alt="image-20250503202325006"></p>
+<p>局域网 与 IEEE 802</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503214351927.png" alt="image-20250503214351927"></p>
+<p>局域网的基本概念和体系结构</p>
+<p>局域网特点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503214843759.png" alt="image-20250503214843759"></p>
+<p>局域网分类</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503215041328.png" alt="image-20250503215041328"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503215118699.png" alt="image-20250503215118699"></p>
+<p> <img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503222703657.png" alt="image-20250503222703657"></p>
+<p>有线局域网</p>
+<p>![</p>
+<p>](C:\Users\李瑞康\AppData\Roaming\Typora\typora-user-images\image-20250503222901953.png)</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503223105949.png" alt="image-20250503223105949"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503223254821.png" alt="image-20250503223254821"></p>
+<p>无线局域网  802.11 wifi</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503223423598.png" alt="image-20250503223423598"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250503223435489.png" alt="image-20250503223435489"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504084036204.png" alt="image-20250504084036204"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504084204729.png" alt="image-20250504084204729"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504084449162.png" alt="image-20250504084449162"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504084553542.png" alt="image-20250504084553542"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504084604907.png" alt="image-20250504084604907"></p>
+<p>传并行转换</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504085014496.png" alt="image-20250504085014496"></p>
+<p>以太网与IEEE 802.3</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504085218623.png" alt="image-20250504085218623"></p>
+<p>物理层技术标准</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504085756950.png" alt="image-20250504085756950"></p>
+<p>同轴电缆以太网 (中继器连接)</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504085953157.png" alt="image-20250504085953157"></p>
+<p>双绞线以太网 交换机&#x2F;集线器连接</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504090147574.png" alt="image-20250504090147574"></p>
+<p>两种常见的 以太网mac层（介质访问控制子层） 标准</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504090329954.png" alt="image-20250504090329954"></p>
+<p>v2标准的的 以太网mac帧</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504161046355.png" alt="image-20250504161046355"></p>
+<p>IEEE 802.3标准的 以太网mac帧</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504091121452.png" alt="image-20250504091121452"></p>
+<p>重点：单播帧、广播帧如何传播？</p>
+<p>mac帧  6 6 2 n 4</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504162044490.png" alt="image-20250504162044490"></p>
+<p>例题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504162417971.png" alt="image-20250504162417971"></p>
+<p>以太网</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504162809245.png" alt="image-20250504162809245"></p>
+<p>VLAN 虚拟局域网</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504163015747.png" alt="image-20250504163015747"></p>
+<p>一个大型局域网 校园网  面临的问题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504163450332.png" alt="image-20250504163450332"></p>
+<p>vlan 虚拟局域网</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504163721353.png" alt="image-20250504163721353"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504163851040.png" alt="image-20250504163851040"></p>
+<p>vlan  划分方式</p>
+<p>基于接口</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504164446840.png" alt="image-20250504164446840"></p>
+<p>基于mac地址</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504164812421.png" alt="image-20250504164812421"></p>
+<p>基于ip地址</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504165004621.png" alt="image-20250504165004621"></p>
+<p>802.1Q的作用</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504165407757.png" alt="image-20250504165407757"></p>
+<p>802.1Q的结构</p>
+<p> <img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504165759441.png" alt="image-20250504165759441"></p>
+<p>知识回顾</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504170021437.png" alt="image-20250504170021437"></p>
+<p>IEEE 802.11无线局域网</p>
+<p>知识总览</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504201727233.png" alt="image-20250504201727233"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504201950049.png" alt="image-20250504201950049"></p>
+<p>802.11 无线局域网的基本概念</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504202356507.png" alt="image-20250504202356507"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504202631351.png" alt="image-20250504202631351"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504202810272.png" alt="image-20250504202810272"></p>
+<p>802.11帧的分类</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504203019396.png" alt="image-20250504203019396"></p>
+<p>802.11 数据帧 格式</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504203446037.png" alt="image-20250504203446037"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504204006894.png" alt="image-20250504204006894"></p>
+<p>例题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504204244722.png" alt="image-20250504204244722"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504204425794.png" alt="image-20250504204425794"></p>
+<p>知识回顾</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504204740732.png" alt="image-20250504204740732"></p>
+<p>拓展 RTS CTS ACK 帧格式</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504205055409.png" alt="image-20250504205055409"></p>
+<p>以太网交换机</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250504205226990.png" alt="image-20250504205226990"></p>
+<p>以太网交换机的自学习功能</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250505091106936.png" alt="image-20250505091106936"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250505091112038.png" alt="image-20250505091112038"></p>
+<p>国企自动作废</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250505091724220.png" alt="image-20250505091724220"></p>
+<p> <img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250505091918054.png" alt="image-20250505091918054"></p>
+<p>直通交换  vs 存储转发交换</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250505092550086.png" alt="image-20250505092550086"></p>
+<p> 例题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250505092740240.png" alt="image-20250505092740240"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250505092859338.png" alt="image-20250505092859338"></p>
+<p>网路层的功能</p>
+<p>网络层所处的地位</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250505093213631.png" alt="image-20250505093213631"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250505093348588.png" alt="image-20250505093348588"></p>
+<p>网络层考研大纲</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250505093856340.png" alt="image-20250505093856340"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250505094846284.png" alt="image-20250505094846284"></p>
+<p>IPV4 分组</p>
+<p>各种协议之间的关系</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250506192406709.png" alt="image-20250506192406709"></p>
+<p>ip分组 IP数据报 的格式</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250506193020368.png" alt="image-20250506193020368"></p>
+<p>例题 真题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250506193354468.png" alt="image-20250506193354468"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250506193439510.png" alt="image-20250506193439510"></p>
+<p>知识回顾</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250506204821254.png" alt="image-20250506204821254"></p>
+<p>ip地址</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250506205405793.png" alt="image-20250506205405793"></p>
+<p>ip数据包  ip分组 格式</p>
+<p>最初的ip地址分类方案</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507181736646.png" alt="image-20250507181736646"></p>
+<p>认识ip地址   ip地址在分组转发中的作用</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507182332446.png" alt="image-20250507182332446"></p>
+<p>网关 就是 通常说的  路由器</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507182718304.png" alt="image-20250507182718304"></p>
+<p>arp 协议 让同一个网络内的主机、路由器之间查询IP地址 对应的mac地址 等于多少</p>
+<p>h1 给 h7 发送ip数据包的一个过程</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507183300124.png" alt="image-20250507183300124"></p>
+<p> h1给互联网的其他主机发送的其他数据报</p>
+<p>内部网络传送IP数据报不需要经过默认网关 也就是路由器</p>
+<p>每一台主机接入一个网络的时候 首先要先给他分配一个IP地址 除此之外还需要给这台主机配置默认网关</p>
+<p> 如果在本网络内部传输IP数据报 则可用arp协议直接查询  目的地址对应的mac地址</p>
+<p>一些特殊用途的ip地址</p>
+<p> <img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507185607989.png" alt="image-20250507185607989"></p>
+<p>子网划分 与 子网掩码</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507192017601.png" alt="image-20250507192017601"></p>
+<p>画图训练</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507192045711.png" alt="image-20250507192045711"></p>
+<p>子网掩码   1个子网 就是17为1 15位0</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507193604040.png" alt="image-20250507193604040"></p>
+<p>如果有 子网掩码 其他网络接口也需要配置子网掩码  例如 路由器</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507200209778.png" alt="image-20250507200209778"></p>
+<p>主机发送IP数据报的过程</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507200347059.png" alt="image-20250507200347059"></p>
+<p>路由器转发IP数据报的过程</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507200544765.png" alt="image-20250507200544765"></p>
+<p>后面的绿色字代表子网掩码前面是几个1</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507200951189.png" alt="image-20250507200951189"></p>
+<p>无分类编制 CIDR</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507205715564.png" alt="image-20250507205715564"></p>
+<p>传统ip地址分配方案有什么缺陷</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507205926240.png" alt="image-20250507205926240"></p>
+<p>无分类编制  cidr  cidr记法</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507210253954.png" alt="image-20250507210253954"></p>
+<p>定长子网划分 变长子网划分</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507210935678.png" alt="image-20250507210935678"></p>
+<p>定子网划分缺点</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507211225429.png" alt="image-20250507211225429"></p>
+<p>例1</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507214637859.png" alt="image-20250507214637859"></p>
+<p>例2</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507214903427.png" alt="image-20250507214903427"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250507220610011.png" alt="image-20250507220610011"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508205831845.png" alt="image-20250508205831845"></p>
+<p>真题  定长子网划分</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508210235989.png" alt="image-20250508210235989"></p>
+<p>真题 变长子网划分</p>
+<p>每一个叶子节点 对应一个子网</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508210806001.png" alt="image-20250508210806001"></p>
+<p>知识回顾</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508211006589.png" alt="image-20250508211006589"></p>
+<p>路由聚合</p>
+<p>例2  无分类编制cidr、变长子网划分的应用</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508211121712.png" alt="image-20250508211121712"></p>
+<p>路由聚合</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508211630255.png" alt="image-20250508211630255"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508212141965.png" alt="image-20250508212141965"></p>
+<p>最长前缀匹配原则</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508212726782.png" alt="image-20250508212726782"></p>
+<p>理解能就能做大题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508212854909.png" alt="image-20250508212854909"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508212952359.png" alt="image-20250508212952359"></p>
+<p>引入cidr技术之后 ip数据报里的源地址 发送方的IP地址和目的地址  接收方的ip地址  不用写后面的&#x2F;28  &#x2F;17 这种表示的是该主机内部配置的子网掩码有多少个比特的1   所以在构造ip数据包的时候 源地址 目的地址不与要加后缀  只需要写IP地址就可以</p>
+<p>封装成帧</p>
+<p>判断 接受 和 发送是否属于同一个 子网  根据子网掩码</p>
+<p>如果不是 就发送给默认网关 </p>
+<p>arp协议可以查询同一网络内mac地址 和 IP地址之间的关系</p>
+<p>必须理解 </p>
+<p>主机发送IP数据报的过程 和 路由器转发一个ip数据报的过程</p>
+<p>网络地址转换  NAT   network  address  translation</p>
+<p>传输层 端口号 的概念</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508220011497.png" alt="image-20250508220011497"></p>
+<p>传输层指明端口号  网络层指明IP地址</p>
+<p>如何缓解ip地址不够用的问题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508220452717.png" alt="image-20250508220452717"></p>
+<p>外网ip  也叫 公网ip  通常是由isp提供的 是全球唯一的</p>
+<p>NAT  要点总结</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508220625731.png" alt="image-20250508220625731"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508220734968.png" alt="image-20250508220734968"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508221410164.png" alt="image-20250508221410164"></p>
+<p>NAT  要点总结</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250508223620495.png" alt="image-20250508223620495"></p>
+<p>地址解析协议  ARP 协议</p>
+<p>各种协议之间的关系</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250511170913778.png" alt="image-20250511170913778"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512093849468.png" alt="image-20250512093849468"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512094210759.png" alt="image-20250512094210759"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512095714367.png" alt="image-20250512095714367"></p>
+<p>以太网  mav 帧</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512100002010.png" alt="image-20250512100002010"></p>
+<p>知识回顾</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512100031368.png" alt="image-20250512100031368"></p>
+<p>动态主机配置协议 DHCP </p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512101704722.png" alt="image-20250512101704722"></p>
+<p>各种协议之间的关系</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512101913500.png" alt="image-20250512101913500"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512105307953.png" alt="image-20250512105307953"></p>
+<p>知识回顾</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512105609560.png" alt="image-20250512105609560"></p>
+<p>路由算法和路由协议</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512110423906.png" alt="image-20250512110423906"></p>
+<p>传输层</p>
+<p>传输层提供的服务</p>
+<p>传输层在协议栈中的位置</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512112949320.png" alt="image-20250512112949320"></p>
+<p>传输层端口号的概念</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512113230901.png" alt="image-20250512113230901"></p>
+<p>进程 端口号 传输层协议之间的关系</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512114053140.png" alt="image-20250512114053140"></p>
+<p>传输层描述</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512114346273.png" alt="image-20250512114346273"></p>
+<p>熟知端口号</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512114651832.png" alt="image-20250512114651832"></p>
+<p>有链接传输  无连接传输</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512115340628.png" alt="image-20250512115340628"></p>
+<p>可靠传输  不可靠传输</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512115557303.png" alt="image-20250512115557303"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512115741882.png" alt="image-20250512115741882"></p>
+<p>TCP协议 </p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512152800110.png" alt="image-20250512152800110"></p>
+<p>UDP协议</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512152811546.png" alt="image-20250512152811546"></p>
+<p>UDP数据报的格式</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512153212676.png" alt="image-20250512153212676"></p>
+<p>IP数据报格式</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512153052277.png" alt="image-20250512153052277"></p>
+<p>UDP数据报示例</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512153513628.png" alt="image-20250512153513628"></p>
+<p>UDP协议</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512153622176.png" alt="image-20250512153622176"></p>
+<p>UDP检验</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512154605270.png" alt="image-20250512154605270"></p>
+<p>发送方的传输层</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512154943669.png" alt="image-20250512154943669"></p>
+<p>接收方  UDP检验</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512155231014.png" alt="image-20250512155231014"></p>
+<p>真题   开头进行了  回卷     所以不能仅仅 算结尾的数字</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512155524726.png" alt="image-20250512155524726"></p>
+<p>UDP检验要点总结</p>
+<p>**<img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512155742698.png" alt="image-20250512155742698"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512155946128.png" alt="image-20250512155946128"></p>
+<p>TCP协议的框架梳理</p>
+<p>TCP报文段</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512160142854.png" alt="image-20250512160142854"></p>
+<p>TCP协议三大阶段</p>
+<p>建立连接  三次握手   3个TCP段</p>
+<p>数据传输</p>
+<p>释放连接 四次挥手   4个TCP段</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512160827950.png" alt="image-20250512160827950"></p>
+<p>建立一次TCP连接可以传输多个报文   可以双向传输多个报文</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512161534778.png" alt="image-20250512161534778"></p>
+<p>TCP报文段</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512161637366.png" alt="image-20250512161637366"></p>
+<p>TCP段格式</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512162422686.png" alt="image-20250512162422686"></p>
+<p>数据偏移   418  首总偏</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512163238095.png" alt="image-20250512163238095"></p>
+<p>紧急指针</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512170029895.png" alt="image-20250512170029895"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512170451465.png" alt="image-20250512170451465"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512170512091.png" alt="image-20250512170512091"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512170629851.png" alt="image-20250512170629851"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512170829410.png" alt="image-20250512170829410"></p>
+<p>窗口  这个字段  是实现 流量控制的关键</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512171201239.png" alt="image-20250512171201239"></p>
+<p>校验和  16比特   过程 和 UDP 雷同</p>
+<p>MSS 选项</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512171903838.png" alt="image-20250512171903838"></p>
+<p>总结</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512172203008.png" alt="image-20250512172203008"></p>
+<p>TCP连接管理</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512172438811.png" alt="image-20250512172438811"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512172502757.png" alt="image-20250512172502757"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512173041103.png" alt="image-20250512173041103"></p>
+<p>建立连接 三次握手</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512173659609.png" alt="image-20250512173659609"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512174002233.png" alt="image-20250512174002233"></p>
+<p>真题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512174415186.png" alt="image-20250512174415186"></p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512174512348.png" alt="image-20250512174512348"></p>
+<p>进程的TCP状态转换</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512174648019.png" alt="image-20250512174648019"></p>
+<p>真题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512175254017.png" alt="image-20250512175254017"></p>
+<p>建立连接阶段耗时分析</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512175119229.png" alt="image-20250512175119229"></p>
+<p>TCP 连接管理  释放连接</p>
+<p>四次挥手</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512180012622.png" alt="image-20250512180012622"></p>
+<p>进程状态转换</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512180209529.png" alt="image-20250512180209529"></p>
+<p>真题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512222707989.png" alt="image-20250512222707989"></p>
+<p>msl时间 和 mss 大小</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512222954831.png" alt="image-20250512222954831"></p>
+<p>真题</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512223102819.png" alt="image-20250512223102819"></p>
+<p>要点回顾</p>
+<p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.assets/image-20250512223548110.png" alt="image-20250512223548110"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">李瑞康</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2025/05/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">http://example.com/2025/05/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/05/24/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment </div></div></div></a><a class="pagination-related" href="/2025/05/25/mybatis-plus/" title="mybatis plus"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">mybatis plus</div></div><div class="info-2"><div class="info-item-1">MyBatis-Plus 学习笔记MyBatis-Plus ( 简称 MP ) 是一款基于 MyBatis 的增强工具，他并不是由官方提供，而是由个人开发出来的一款增强框架，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生，后面 mybatis-plus 会简称为 MP  官方自述   无侵入：只做增强不做改变，引入它不会对现有工程产生影响，如丝般顺滑 损耗小：启动即会自动注入基本 CURD，性能基本无损耗，直接面向对象操作 强大的 CRUD 操作：内置通用 Mapper、通用 Service，仅仅通过少量配置即可实现单表大部分 CRUD 操作，更有强大的条件构造器，满足各类使用需求 支持 Lambda 形式调用：通过 Lambda 表达式，方便的编写各类查询条件，无需再担心字段写错 支持主键自动生成：支持多达 4 种主键策略（内含分布式唯一 ID 生成器 - Sequence），可自由配置，完美解决主键问题 支持 ActiveRecord 模式：支持 ActiveRecord 形式调用，实体类只需继承 Model 类即可进行强大的 CRUD...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">李瑞康</div><div class="author-info-description">一起努力</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/25/RabbitMQ%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="RabbitMQ学习笔记">RabbitMQ学习笔记</a><time datetime="2025-05-25T02:16:31.000Z" title="Created 2025-05-25 10:16:31">2025-05-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/25/Mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Mybatis学习笔记">Mybatis学习笔记</a><time datetime="2025-05-25T02:16:02.000Z" title="Created 2025-05-25 10:16:02">2025-05-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/25/SpringMVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="SpringMVC学习笔记">SpringMVC学习笔记</a><time datetime="2025-05-25T02:15:29.000Z" title="Created 2025-05-25 10:15:29">2025-05-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/25/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Redis学习笔记">Redis学习笔记</a><time datetime="2025-05-25T02:14:55.000Z" title="Created 2025-05-25 10:14:55">2025-05-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/25/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Docker学习笔记">Docker学习笔记</a><time datetime="2025-05-25T02:14:27.000Z" title="Created 2025-05-25 10:14:27">2025-05-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By 李瑞康</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
